@@ -1,0 +1,45 @@
+﻿@page
+@model NewLab1.Pages.OfficeHourSch.ChooseFacultyModel
+@{
+     <div class="jumbotron text-center">
+      <h1>Welcome to the Office Hours Page</h1>
+      <p>Please select a faculty member from the dropdown menu below to view their office hours.</p>
+    </div>
+
+    //testing to make sure the user is logged in to access the pages
+    if (HttpContext.Session.GetString("username") != null)
+    {
+       
+        @*Drop down menu with sql data for each first and last name of faculty*@
+        <form asp-page-handler="SingleSelect" method="post">
+            <select asp-for="SelectedTeacher" class="form-select">
+                <option value""disabled selected>Select Faculty Member</option>
+                @foreach (var faculty in Model.FacultyList)
+                {
+                    <option value="@faculty.FacultyID">@faculty.FirstName @faculty.LastName</option>
+                }
+
+            </select>
+            <button class="btn btn-primary">Submit Selection</button>
+        </form>
+        
+
+
+            
+                <p>User @HttpContext.Session.GetString("username") Logged in!</p>
+                <br />
+                <a class="btn btn-outline-primary" asp-page="/Index" asp-route-logout="true">Logout</a>
+            }
+        }
+
+<br />
+<br />
+<br />
+<br />
+
+
+
+<p>Phillip Ruta, Arden Barrett</p>
+
+
+

@@ -1,0 +1,48 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 style="color:deeppink;" class="display-4">Welcome to Office Hours</h1>
+    <h2 style="font-size:200%;" class="display-4">Please Create an Account or Login: </h2>
+</div>
+
+
+<form asp-page="CreateHashedLogin">
+    <label>Enter First Name:</label>
+    <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
+    <br />
+    <label>Enter Last Name:</label>
+    <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
+    <br />
+    <label>Enter New Username:</label>
+    <input asp-for="Username" class="form-control" placeholder="Enter Username" />
+    <br />
+    <label>Enter New User's Password:</label>
+    <input asp-for="Password" class="form-control" type="password" />
+    <br />
+    <label>Enter Email:</label>
+    <input asp-for="Email" class="form-control" placeholder="Enter Email" />
+    <br />
+    <label>Enter Phone Number:</label>
+    <input asp-for="Phone" class="form-control" placeholder="Enter Phone Number (Students Only): " />
+    <br />
+    <label>Select User Type:</label>
+    <select asp-for="PersonType" class="form-control">
+        <option value="Faculty">Faculty</option>
+        <option value="Student">Student</option>
+    </select>
+    <br />
+    <input type="submit" class="btn btn-primary" />
+    or
+    <a href="/OfficeHourSch/HashedLogin">Login</a>
+</form>
+@{
+    if (ViewData["UserCreate"] != null)
+    {
+        <p class="text-success">@ViewData["UserCreate"]</p>
+    }
+
+}

@@ -1,0 +1,65 @@
+﻿@page 
+@using System.Data.SqlClient;
+@using NewLab1.Pages.DB;
+@model NewLab1.Pages.OfficeHourSch.OfficeHourPageTeacherModel
+@{
+}
+@{
+    <p>Phillip Ruta, Anuj Passan, Arden Barrett</p>
+
+    //testing the user is logged in to see the pages
+    if (HttpContext.Session.GetString("username") != null)
+    {
+
+
+        @*Table for displaying office hours*@
+
+
+
+        <table class="table table-bordered table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>Office Hour ID</th>
+                    <th>Office Number:</th>
+                    <th>Date: </th>
+                    <th>Time: </th>
+                    <th>Faculty ID:</th>
+                    <th>Student Name:</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            
+            
+            
+            @{
+
+
+                   //foreach loop to get data from sql database
+                    foreach (var officeHours in Model.Hours)
+                    {
+                        <tr>
+                            <td class="text-danger">@officeHours.FacultyID</td>
+                            <td>@officeHours.OfficeNumber</td>
+                            <td>@officeHours.Date</td>
+                            <td>@officeHours.Time</td>
+                            <td>@officeHours.FacultyID</td>
+                            <td>@officeHours.StudentName</td>
+                            
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        <a href="/OfficeHourSch/AddOfficeHours">Add Office Hours</a>
+
+
+    }
+
+    <br />
+            //A link to the view meetings query table
+    <p>To View the Current Meetings Scheduled Click here! <a href="http://localhost:5219/OfficeHourSch/ViewMeeting"> View Meetings</a>.</p>
+
+
+}

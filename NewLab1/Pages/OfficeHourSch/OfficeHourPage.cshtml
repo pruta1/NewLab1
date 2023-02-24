@@ -1,0 +1,53 @@
+﻿@page "{FacultyID}"
+@model NewLab1.Pages.OfficeHourSch.OfficeHourPageModel
+@{
+    <p>Phillip Ruta, Anuj Passan, Arden Barrett</p>
+    //testing the user is logged in to see the pages
+    if (HttpContext.Session.GetString("username") != null)
+    {
+
+
+               @*Table for displaying office hours*@
+
+
+
+        <table class="table table-bordered table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>Office Hour ID</th>
+                    <th>Office Number:</th>
+                    <th>Date: </th>
+                    <th>Time: </th>
+                    <th>Faculty ID:</th>
+                    <th>Student Name:</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+
+
+                    //foreach loop to get data from sql database
+                    foreach (var officeHours in Model.Hours)
+                    {
+                        <tr>
+                            <td class="text-danger">@officeHours.OfficeHourID</td>
+                            <td>@officeHours.OfficeNumber</td>
+                            <td>@officeHours.Date</td>
+                            <td>@officeHours.Time</td>
+                            <td>@officeHours.FacultyID</td>
+                            <td>@officeHours.StudentName</td>
+                            <td>
+                                <a asp-page="JoinStudents" class="btn btn-primary" asp-route-officehourID="@officeHours.OfficeHourID">Join</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+
+        }
+
+    <br />
+
+    }

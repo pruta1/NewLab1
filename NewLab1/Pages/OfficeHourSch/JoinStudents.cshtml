@@ -1,0 +1,13 @@
+﻿@page ""
+@model NewLab1.Pages.OfficeHourSch.JoinStudentsModel
+@{
+}
+
+<form asp-page="JoinStudents">
+    <input type="hidden" asp-for="@Model.OfficeHourView.OfficeHourID" />
+    <label asp-for="@Model.OfficeHourView.StudentName"></label>
+    <input type="text" asp-for="@Model.OfficeHourView.StudentName" />
+    <br /><br />
+    <input type="submit" class="btn btn-success" asp-page="JoinStudents" />
+    <a asp-page="OfficeHourPage" class="btn btn-secondary">Cancel</a>
+</form>

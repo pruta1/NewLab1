@@ -1,0 +1,39 @@
+﻿@page
+@model NewLab1.Pages.OfficeHourSch.HashedLoginModel
+@{
+}
+<div class="text-center mb-5">
+    <h1>Welcome to the Login Page</h1>
+    <p>Please enter your credentials to log in.</p>
+</div>
+
+<form asp-page="HashedLogin">
+    <input asp-for="Username" class="form-control" placeholder="Enter Username" />
+    <br />
+    <label>Enter Password:</label>
+    <input asp-for="Password" class="form-control" type="password" />
+    <br />
+    <label>Select User Type:</label>
+    <select asp-for="PersonType" class="form-control">
+        <option value="Faculty">Faculty</option>
+        <option value="Student">Student</option>
+    </select>
+    <input type="submit" class="btn btn-primary" />
+</form>
+
+(USE: Username: "JWall" Password: "JWall" for a faculty)
+(USE: Username: "pruta" Password: "pruta" for a student)
+
+
+
+<br />
+@{
+    if (HttpContext.Session.GetString("username") != null)
+    {
+        <p class="text-success">@ViewData["LoginMessage"]</p>
+    }
+    else
+    {
+        <p class="text-danger">@ViewData["LoginMessage"]</p>
+    }
+}

@@ -1,0 +1,53 @@
+﻿@page
+@using NewLab1.Pages.DB;
+@using System.Data.SqlClient;
+@model NewLab1.Pages.OfficeHourSch.ViewMeetingModel
+@{
+}
+@{
+    //Used to check if the user has access to this page
+    if (HttpContext.Session.GetString("username") != null)
+    {
+
+        //Changing the color of the text
+        <h2 style="color:hotpink" h2">Current Meetings Scheduled:</h2>
+        <table class="table table-bordered table-responsive table progress-bar-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Student First Name:</th>
+                    <th>Student Last Name:</th>
+                    <th>Student Email:</th>
+                    <th>Time:</th>
+                    <th>Date:</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    //Query to select students names and which meeting they are scheudled for
+
+                    string sqlQuery = "SELECT Student.fName, Student.lName, Student.studentEmail, Meeting.timeID, Meeting.dateID FROM Meeting INNER JOIN Student ON Meeting.studentID = Student.studentID ";
+
+                    SqlDataReader QueryResults = DBClass.GeneralReaderQuery(sqlQuery);
+
+                    while (QueryResults.Read())
+                    {
+                        <tr>
+                            <td>@QueryResults["fName"]</td>
+                            <td>@QueryResults["lName"]</td>
+                            <td>@QueryResults["studentEmail"]</td>
+                            <td>@QueryResults["timeID"]</td>
+                            <td>@QueryResults["dateID"]</td>
+
+
+                        </tr>
+                    }
+                    DBClass.Lab3DBConnection.Close();
+                }
+
+
+            </tbody>
+
+        </table>
+    }
+}
