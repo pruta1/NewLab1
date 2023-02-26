@@ -5,7 +5,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using NewLab1.Pages.DB;
 using System.Xml.Linq;
-
+using System.Reflection.Metadata.Ecma335;
+using System.Reflection;
+using MongoDB.Driver.Core.Configuration;
 
 namespace NewLab1.Pages.OfficeHourSch
 {
@@ -46,25 +48,24 @@ namespace NewLab1.Pages.OfficeHourSch
                     FirstName = facultyReader["fName"].ToString(),
                     LastName = facultyReader["lName"].ToString(),
                     FacultyID = Int32.Parse(facultyReader["facultyID"].ToString())
-
                 });
-
             }
+
+            // Close the reader and connection after you have finished using them
+            facultyReader.Close();
             DBClass.Lab3DBConnection.Close();
-
-
-
         }
+
+
+
+
+
 
         public IActionResult OnPostSingleSelect(int facultyID)
         {
             return RedirectToPage("OfficeHourPage", new { facultyID = SelectedTeacher });
         }
+   
+        }
 
     }
-
-
-
-
-
-}

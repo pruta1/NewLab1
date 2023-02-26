@@ -1,4 +1,5 @@
 ﻿using NewLab1.Pages.DataClasses;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace NewLab1.Pages.DB
@@ -26,8 +27,10 @@ namespace NewLab1.Pages.DB
 
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
 
-            return tempReader;
+            // Do not close the connection here
+            // Do not use a using statement
 
+            return tempReader;
         }
         public static SqlDataReader StudentReader()
         {
@@ -43,6 +46,7 @@ namespace NewLab1.Pages.DB
             return tempReader;
 
         }
+       
 
         public static SqlDataReader SingleProductReader(int StudentID)
         {
@@ -320,7 +324,6 @@ namespace NewLab1.Pages.DB
             SqlCommand cmdLogin = new SqlCommand();
             cmdLogin.Connection = Lab3DBConnection;
             cmdLogin.Connection.ConnectionString = AuthConnString;
-
             cmdLogin.CommandText = loginQuery;
             cmdLogin.Parameters.AddWithValue("@Username", Username);
             cmdLogin.Parameters.AddWithValue("@PersonType", PersonType);
