@@ -39,9 +39,7 @@ namespace NewLab1.Pages.OfficeHourSch
                 }
 
                 while (tempReader.Read())
-                {
-                    // Get the user's ID from the database
-             
+                {             
 
                     // Check the user's ID and redirect accordingly
                     if (personType == "Faculty")
@@ -71,6 +69,10 @@ namespace NewLab1.Pages.OfficeHourSch
             return RedirectToPage("/Index");
         }
 
+
+
+        //Used to populate valid information in the login boxes
     }
 
 }
+

@@ -1,0 +1,23 @@
+CREATE TABLE HashedCredentials(HashedCredentialsID int Identity(1,1) PRIMARY KEY,Username nvarchar(200),Password nvarchar(200),PersonType Nvarchar(25));
+
+INSERT INTO HashedCredentials (Username,Password,PersonType) VALUES ('JWall','1000:cbHfRH3X0rH8oLVuAhK+NA6EoHzM+f2L:gc11Fei2SsJXf3wAGX/ok0ZSjzg=','Faculty');
+INSERT INTO HashedCredentials (Username,Password,PersonType) VALUES ('BBryant','1000:cbHfRH3X0rH8oLVuAhK+NA6EoHzM+f2L:gc11Fei2SsJXf3wAGX/ok0ZSjzg=','Faculty');
+INSERT INTO HashedCredentials (Username,Password,PersonType) VALUES ('JSmith','1000:cbHfRH3X0rH8oLVuAhK+NA6EoHzM+f2L:gc11Fei2SsJXf3wAGX/ok0ZSjzg=','Faculty');
+INSERT INTO HashedCredentials (Username,Password,PersonType) VALUES ('admin','1000:cbHfRH3X0rH8oLVuAhK+NA6EoHzM+f2L:gc11Fei2SsJXf3wAGX/ok0ZSjzg=','Faculty');
+INSERT INTO HashedCredentials (Username,Password,PersonType) VALUES ('student','1000:cbHfRH3X0rH8oLVuAhK+NA6EoHzM+f2L:gc11Fei2SsJXf3wAGX/ok0ZSjzg=','Student');
+
+
+
+CREATE PROCEDURE sp_Lab3Login
+
+@Username AS NVARCHAR(50),
+@Password AS NVARCHAR(50)
+
+AS
+BEGIN
+
+	SELECT Password FROM HashedCredentials WHERE Username = @Username;
+
+END;
+
+

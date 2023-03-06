@@ -19,11 +19,25 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Student Folder
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/OfficeHourSch/ChooseFaculty">ChooseFaculty</a></li>
+                            <li><a class="dropdown-item" href="/OfficeHourSch/SummaryPage">Summary</a></li>
+                            <li><a class="dropdown-item" href="/OfficeHourSch/ViewMeeting">Meetings</a></li>
+                            <li><a class="dropdown-item" href="/OfficeHourSch/StudentAccount">MyAccount</a></li>
+                            <li><a class="dropdown-item" href="/OfficeHourSch/SearchBar">Search</a></li>
+                        </ul>
+
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Faculty Folder
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/OfficeHourSch/FacultyOfficeHour">My Hours</a></li>
+                                <li><a class="dropdown-item" href="/OfficeHourSch/AddOfficeHours">Add Hours</a></li>
                         </li>
                     </ul>
                 </div>

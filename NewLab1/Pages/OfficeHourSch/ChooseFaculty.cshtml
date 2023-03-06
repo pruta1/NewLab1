@@ -22,6 +22,11 @@
             <button class="btn btn-primary">Submit Selection</button>
         </form>
 
+        <p>User @HttpContext.Session.GetString("username") Logged in!</p>
+        <br />
+        <a class="btn btn-outline-primary" asp-page="/Index" asp-route-logout="true">Logout</a>
+
+
 
 
 

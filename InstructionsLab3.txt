@@ -1,0 +1,4 @@
+1. Login with either admin account or student account -- both passwords are "password" (make sure to select user type: faculty or student)
+2. To create an account go to the home or index page and fill out correct credentials then login 
+3a. With a faculty login, you can view your own office hours as well as create new office hour slots and add or remove student names from the office hours 
+3b. With a student login, you can view any faculty members office hours with a drop down menu or search bar as well as join office hours and view current meetings 

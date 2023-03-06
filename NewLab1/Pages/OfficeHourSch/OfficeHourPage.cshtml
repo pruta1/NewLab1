@@ -1,9 +1,23 @@
 ﻿@page 
 @model NewLab1.Pages.OfficeHourSch.OfficeHourPageModel
 @{
-    <p>Phillip Ruta, Anuj Passan, Arden Barrett</p>
+   
     //testing the user is logged in to see the pages
-    if (HttpContext.Session.GetString("username") != null)
+      
+    <a id="myLink" href="http://localhost:5183/OfficeHourSch/studentaccount" style="display:none;"></a>
+<button type="button" class="btn btn-primary position-relative" onclick="document.getElementById('myLink').click()">
+    Account
+    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+        <span class="visually-hidden">New alerts</span>
+    </span>
+</button>
+
+    <br />
+    <br />
+    <br />
+    
+    
+    @if (HttpContext.Session.GetString("username") != null)
     {
 
 
@@ -42,9 +56,15 @@
             </tbody>
         </table>
 
-
+        <form method="post">
+            <button type="submit" asp-page-handler="StudentQueue">Go to Student Queue</button>
+        </form>
+        
         }
 
     <br />
 
+    <p>Phillip Ruta, Anuj Passan, Arden Barrett</p>
+
     }
+

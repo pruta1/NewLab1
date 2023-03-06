@@ -45,9 +45,9 @@ namespace NewLab1.Pages.OfficeHourSch
             SqlDataReader tempReader = DBClass.SingleReader();
             int facultyID = 0;
 
-            if (tempReader.Read())
+            while (tempReader.Read())
             {
-                facultyID = tempReader.GetInt32(tempReader.GetOrdinal("FacultyID"));
+                facultyID = (int)tempReader["FacultyID"];
             }
 
             tempReader.Close();

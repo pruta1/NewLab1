@@ -1,0 +1,50 @@
+﻿@page
+@model NewLab1.Pages.OfficeHourSch.StudentQueueModel
+@{
+    ViewData["Title"] = "Student Listing";
+}
+@*    testing the user is logged in to see the pages
+*@  
+
+   
+@if (HttpContext.Session.GetString("username") != null)
+{
+
+    @*Table for displaying office hours*@
+
+
+
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+
+                <th>QueueID:</th>
+                <th>QueueOrder: </th>
+                <th>FacultyID: </th>
+                <th>StudentID:</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+
+
+                //foreach loop to get data from sql database
+                foreach (var Queue in Model.QueueList)
+                {
+                    <tr>
+                        <td class="text-danger">@Queue.QueueID</td>
+                        <td>@Queue.QueueID</td>
+                        <td>@Queue.QueueOrder</td>
+                        <td>@Queue.FacultyID</td>
+                        <td>@Queue.StudentID</td>
+                        <td>
+                            <a asp-page="JoinQueue" class="btn btn-primary" asp-route-officehourID="@Queue.QueueID">Join</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <br />
+}

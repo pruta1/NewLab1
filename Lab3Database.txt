@@ -1,0 +1,28 @@
+CREATE TABLE Faculty (facultyID int IDENTITY(1,1) PRIMARY KEY, fName nvarchar(50),lName nvarchar(50), userName nvarchar(50), facultyEmail nvarchar(50));
+
+CREATE TABLE  Student (studentID int IDENTITY(1,1) PRIMARY KEY, fName nvarchar(50),lName nvarchar(50), userName nvarchar(50), studentEmail nvarchar(50),phone nvarchar(50));
+
+CREATE TABLE Meeting (meetingID int IDENTITY(1,1) PRIMARY KEY, office# nvarchar(50),dateID nvarchar(50), timeID char(50), facultyID int REFERENCES Faculty(FacultyID), studentID int REFERENCES Student(studentID));
+
+CREATE TABLE OfficeHours (officeHoursID int IDENTITY(1,1) PRIMARY KEY, office# nvarchar(50),queue# int, dateID nvarchar(50), timeID char(50), studentName char(50), facultyID int REFERENCES Faculty(FacultyID));
+
+insert into Student(fName, lName, userName,studentEmail, phone) VALUES ('Anuj', 'Passan', 'APassan', 'aPassan@edu.com','2024432134');
+insert into Student(fName, lName, userName, studentEmail, phone) VALUES ('Phillip', 'Ruta', 'PRuta', 'pRuta@edu.com','2024435732');
+insert into Student(fName, lName, userName, studentEmail, phone) VALUES ('Arden', 'Barrett', 'ABarrett', 'aBarrett@edu.com','7032415639');
+insert into Student(fName, lName, userName, studentEmail, phone) VALUES ('student', 'student', 'student', 'student@edu.com','7032415639');
+
+insert into Faculty (fName, lName, userName, facultyEmail) VALUES ('John', 'Wall', 'JWall', 'wall@edu.com');
+insert into Faculty (fName, lName, userName, facultyEmail) VALUES ('Bob', 'Bryant', 'BBryant', 'bob@edu.com');
+insert into Faculty (fName, lName, userName, facultyEmail) VALUES ('Jennifer', 'Smith', 'JSmith', 'jsmith@edu.com');
+insert into Faculty (fName, lName, userName, facultyEmail) VALUES ('admin', 'admin', 'admin', 'admin@edu.com');
+
+insert into Meeting(office#, dateID, timeID, facultyID, studentID) VALUES (1234,'2023-05-25','11:00:00',1,3);
+insert into Meeting(office#, dateID, timeID, facultyID, studentID) VALUES (4123,'2023-05-01','11:30:00',2,1);
+insert into Meeting(office#, dateID, timeID, facultyID, studentID) VALUES (8905,'2023-05-02','12:30:00',3,2);
+
+insert into OfficeHours(office#, dateID, timeID, studentName, facultyID) VALUES (1234,'2023-04-29', '12:00PM - 1:00PM', 'InputName', 1);
+insert into OfficeHours(office#, dateID, timeID, studentName, facultyID) VALUES (4532,'2023-04-30', '1:00PM - 2:00PM', 'InputName', 2);
+insert into OfficeHours(office#, dateID, timeID, studentName, facultyID) VALUES (8905,'2023-04-28', '2:00PM - 3:00PM', 'InputName', 3);
+insert into OfficeHours(office#, dateID, timeID, studentName, facultyID) VALUES (9005,'2023-04-28', '4:00PM - 5:00PM', 'InputName, 4);
+
+

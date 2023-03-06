@@ -37,13 +37,13 @@ namespace NewLab1.Pages.OfficeHourSch
 
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int facultyID)
         {
             DBClass.UpdateOfficeHours(OfficeHourView);
 
             DBClass.Lab3DBConnection.Close();
 
-            return Redirect("/OfficeHourSch/ChooseFaculty");
+            return RedirectToPage("/OfficeHourSch/ChooseFaculty", new {facultyID = facultyID});
         }
 
     }

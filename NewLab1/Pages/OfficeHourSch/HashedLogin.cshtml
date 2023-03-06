@@ -2,6 +2,9 @@
 @model NewLab1.Pages.OfficeHourSch.HashedLoginModel
 @{
 }
+
+
+
 <div class="text-center mb-5">
     <h1>Welcome to the Login Page</h1>
     <p>Please enter your credentials to log in.</p>
@@ -19,10 +22,14 @@
         <option value="Student">Student</option>
     </select>
     <input type="submit" class="btn btn-primary" />
+    
 </form>
 
-(USE: Username: "JWall" Password: "JWall" for a faculty)
-(USE: Username: "pruta" Password: "pruta" for a student)
+<script>
+    function resetForm() {
+        document.getElementById("login-form").reset();
+    }
+</script>
 
 
 

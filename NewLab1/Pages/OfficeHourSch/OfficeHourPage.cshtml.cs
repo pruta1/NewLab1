@@ -15,13 +15,16 @@ namespace NewLab1.Pages.OfficeHourSch
 
         public List<Faculty> FacultyList { get; set; }
 
+        public List<Queue> QueueList { get; set; }  
 
 
 
         public OfficeHourPageModel()
         {
+
             Hours = new List<OfficeHours>();
             FacultyList = new List<Faculty>();
+            QueueList = new List<Queue>();
 
         }
 
@@ -46,6 +49,10 @@ namespace NewLab1.Pages.OfficeHourSch
                 }
             }
             DBClass.Lab3DBConnection.Close();
+        }
+        public IActionResult OnPostStudentQueue()
+        {
+            return RedirectToPage("/OfficeHourSch/StudentQueue");
         }
 
     }

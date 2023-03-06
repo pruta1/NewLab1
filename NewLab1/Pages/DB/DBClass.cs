@@ -32,6 +32,23 @@ namespace NewLab1.Pages.DB
 
             return tempReader;
         }
+
+        public static SqlDataReader QueueReader()
+        {
+            SqlCommand cmdProductRead = new SqlCommand();
+            cmdProductRead.Connection = Lab3DBConnection;
+            cmdProductRead.Connection.ConnectionString = Lab3DBConnString;
+            cmdProductRead.CommandText = "SELECT * FROM Queue";
+
+            cmdProductRead.Connection.Open();
+
+            SqlDataReader tempReader = cmdProductRead.ExecuteReader();
+
+            // Do not close the connection here
+            // Do not use a using statement
+
+            return tempReader;
+        }
         public static SqlDataReader StudentReader()
         {
             SqlCommand cmdProductRead = new SqlCommand();
@@ -192,14 +209,15 @@ namespace NewLab1.Pages.DB
             SqlCommand cmdProductRead = new SqlCommand();
             cmdProductRead.Connection = Lab3DBConnection;
             cmdProductRead.Connection.ConnectionString = Lab3DBConnString;
-            cmdProductRead.CommandText = "SELECT * FROM OfficeHours WHERE facultyID= " + facultyID;
+            cmdProductRead.CommandText = "SELECT * FROM OfficeHours WHERE facultyID= @FacultyID";
+            cmdProductRead.Parameters.AddWithValue("@FacultyID", facultyID);
 
             cmdProductRead.Connection.Open();
 
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
 
             return tempReader;
-        }
+    }
 
 
         public static SqlDataReader SingleOfficeReader(int OfficeHourID)
@@ -318,15 +336,17 @@ namespace NewLab1.Pages.DB
 
         public static bool HashedParameterLogin(string Username, string Password, string PersonType)
         {
-            string loginQuery =
-                "SELECT Password FROM HashedCredentials WHERE Username = @Username AND PersonType = @PersonType";
+
 
             SqlCommand cmdLogin = new SqlCommand();
             cmdLogin.Connection = Lab3DBConnection;
             cmdLogin.Connection.ConnectionString = AuthConnString;
-            cmdLogin.CommandText = loginQuery;
+
+            cmdLogin.CommandType = CommandType.StoredProcedure;
+            cmdLogin.CommandText = "sp_Lab3Login";
             cmdLogin.Parameters.AddWithValue("@Username", Username);
-            cmdLogin.Parameters.AddWithValue("@PersonType", PersonType);
+            cmdLogin.Parameters.AddWithValue("@Password", Password);
+            //cmdLogin.Parameters.AddWithValue("@PersonType", PersonType);
 
             cmdLogin.Connection.Open();
 
@@ -346,6 +366,7 @@ namespace NewLab1.Pages.DB
 
             return false;
         }
+
 
         public static void CreateHashedUser(string Username, string Password, string PersonType)
         {
