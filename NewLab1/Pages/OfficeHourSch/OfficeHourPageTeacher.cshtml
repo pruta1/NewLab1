@@ -5,10 +5,10 @@
 @{
 }
 @{
-    <p>Phillip Ruta, Anuj Passan, Arden Barrett</p>
+   
 
     //testing the user is logged in to see the pages
-    if (HttpContext.Session.GetString("username") != null)
+    if (HttpContext.Session.GetString("username") != null && HttpContext.Session.GetString("personType") == "Faculty")
     {
 
 
@@ -52,7 +52,6 @@
         <a href="/OfficeHourSch/AddOfficeHours">Add Office Hours</a>
 
 
-    }
 
     <br />
             //A link to the view meetings query table
@@ -63,5 +62,12 @@
         Notify Student
 
     </button>
+   
+   }
+    else
+    {
+<p>You do not have permission to access this page.</p>
+<script>setTimeout(function () { window.location.href = '/Index'; }, 2000);</script>
+    }
 
 }

@@ -2,7 +2,7 @@
 @model NewLab1.Pages.OfficeHourSch.EditStudentsModel
 @{
 
- if (HttpContext.Session.GetString("username") != null)
+    if (HttpContext.Session.GetString("username") != null && HttpContext.Session.GetString("personType") == "Faculty")
     {
 
 
@@ -14,7 +14,12 @@
     <input type="submit" class="btn btn-success" asp-page="EditStudents" />
     <a asp-page="OfficeHourPageTeacher" class="btn btn-secondary">Cancel</a>
 </form>
-
     }
 
-}
+else
+        {
+            <p>You do not have permission to access this page.</p>
+            <script>setTimeout(function () { window.location.href = '/Index'; }, 2000);</script>
+        }
+
+    }

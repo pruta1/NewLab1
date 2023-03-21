@@ -2,14 +2,29 @@
 @model NewLab1.Pages.OfficeHourSch.AddOfficeHoursModel
 @{
 }
+@{
 
-<form asp-page="AddOfficeHourss">
+
+    if (HttpContext.Session.GetString("username") != null && HttpContext.Session.GetString("personType") == "Faculty")
+    {
+<form asp-page="AddOfficeHours">
     <input asp-for="NewOfficeHours.OfficeNumber" placeholder="Office Number" />
     <input asp-for="NewOfficeHours.Date" placeholder="Date" />
     <input asp-for="NewOfficeHours.Time" placeholder="Time" />
     <input asp-for="NewOfficeHours.FacultyID" placeholder="FacultyID" />
     <br />
-    <input type="submit" value="Add New Office Hours->" <input />
+            <input type="submit" class="btn btn-primary" value="Add New Office Hours->" />
     <a asp-page="Index">Cancel</a>
 
 </form>
+
+    }
+    else
+    {
+        <p>You do not have permission to access this page.</p>
+        <script>setTimeout(function () { window.location.href = '/Index'; }, 2000);</script>
+    }
+
+    }
+
+    

@@ -5,8 +5,9 @@
         <h1>Welcome to the Office Hours Page</h1>
         <p>Please select a faculty member from the dropdown menu below to view their office hours.</p>
     </div>
+
     //testing to make sure the user is logged in to access the pages
-    if (HttpContext.Session.GetString("username") != null)
+    if (HttpContext.Session.GetString("username") != null && HttpContext.Session.GetString("personType") == "Student")
     {
 
         @*Drop down menu with sql data for each first and last name of faculty*@
@@ -26,19 +27,22 @@
         <br />
         <a class="btn btn-outline-primary" asp-page="/Index" asp-route-logout="true">Logout</a>
 
+    }
+    else
+    {
+        <p>You do not have permission to access this page.</p>
+        <script>setTimeout(function () { window.location.href = '/Index'; }, 2000);</script>
+    }
 
 
 
 
-<br />
-<br />
-<br />
-<br />
+        <br />
+        <br />
+        <br />
+        <br />
 
 
 
-<p>Phillip Ruta, Arden Barrett</p>
 
-
-}
-}
+    }

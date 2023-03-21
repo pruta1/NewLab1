@@ -9,6 +9,6 @@
 
         public string StuEmail { get; set; }
 
-        public int Phone { get; set; }
+        public string Phone { get; set; }
     }
 }

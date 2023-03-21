@@ -2,6 +2,9 @@
 @model NewLab1.Pages.OfficeHourSch.JoinStudentsModel
 @{
 }
+@{
+     if (HttpContext.Session.GetString("username") != null && HttpContext.Session.GetString("personType") == "Student")
+    {
 
 <form asp-page="JoinStudents">
     <input type="hidden" asp-for="@Model.OfficeHourView.OfficeHourID" />
@@ -11,3 +14,11 @@
     <input type="submit" class="btn btn-success" asp-page="JoinStudents" />
     <a asp-page="OfficeHourPage" class="btn btn-secondary">Cancel</a>
 </form>
+
+    }
+    else
+    {
+        <p>You do not have permission to access this page.</p>
+        <script>setTimeout(function () { window.location.href = '/Index'; }, 2000);</script>
+    }
+}

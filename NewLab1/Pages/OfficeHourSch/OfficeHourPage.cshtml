@@ -2,6 +2,8 @@
 @model NewLab1.Pages.OfficeHourSch.OfficeHourPageModel
 @{
    
+    if (HttpContext.Session.GetString("username") != null && HttpContext.Session.GetString("personType") == "Student")
+    {
     //testing the user is logged in to see the pages
       
     <a id="myLink" href="http://localhost:5183/OfficeHourSch/studentaccount" style="display:none;"></a>
@@ -17,8 +19,7 @@
     <br />
     
     
-    @if (HttpContext.Session.GetString("username") != null)
-    {
+   
 
 
                @*Table for displaying office hours*@
@@ -56,15 +57,14 @@
             </tbody>
         </table>
 
-        <form method="post">
-            <button type="submit" asp-page-handler="StudentQueue">Go to Student Queue</button>
-        </form>
         
         }
+        else
+    {
+        <p>You do not have permission to access this page.</p>
+        <script>setTimeout(function () { window.location.href = '/Index'; }, 2000);</script>
+    }
 
-    <br />
-
-    <p>Phillip Ruta, Anuj Passan, Arden Barrett</p>
 
     }
 
