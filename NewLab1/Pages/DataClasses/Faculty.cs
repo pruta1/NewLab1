@@ -12,5 +12,7 @@
 
         public string FacultyEmail { get; set; }
 
+        public string Image { get; set; }
+
     }
 }

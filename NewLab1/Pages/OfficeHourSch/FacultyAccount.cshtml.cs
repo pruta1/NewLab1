@@ -2,48 +2,41 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NewLab1.Pages.DataClasses;
 using NewLab1.Pages.DB;
-using System.Buffers.Text;
-using System;
 using System.Data.SqlClient;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using NewLab1.Pages.DataClasses;
-using NewLab1.Pages.DB;
-using System;
-using System.Data.SqlClient;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace NewLab1.Pages.OfficeHourSch
 {
-    public class StudentAccountModel : PageModel
+    public class FacultyAccountModel : PageModel
     {
 
         [BindProperty]
-        public Student EditView { get; set; }
+        public Faculty EditView { get; set; }
+
 
         [BindProperty]
         public IFormFile Picture { get; set; }
 
-        public StudentAccountModel()
+
+
+        public FacultyAccountModel()
         {
 
-            EditView = new Student();
+            EditView = new Faculty();
 
         }
 
-        public void OnGet(int studentid)
+
+        public void OnGet(int facultyid)
         {
-            SqlDataReader SingleReader = DBClass.SingleStudentReader(studentid);
+            SqlDataReader SingleReader = DBClass.SingleFacultyReader(facultyid);
             while (SingleReader.Read())
             {
-                EditView.StudentID = studentid;
+                EditView.FacultyID = facultyid;
+
+
                 EditView.FirstName = SingleReader["fName"].ToString();
                 EditView.LastName = SingleReader["lName"].ToString();
-                EditView.StuEmail = SingleReader["studentEmail"].ToString();
-                EditView.Phone = SingleReader["phone"].ToString();
+                EditView.FacultyEmail = SingleReader["facultyEmail"].ToString();
                 EditView.Image = SingleReader["image"].ToString(); // add this line
             }
             DBClass.Lab3DBConnection.Close();
@@ -63,21 +56,23 @@ namespace NewLab1.Pages.OfficeHourSch
                 EditView.Image = fileName;
             }
 
-            DBClass.UpdateStudent(EditView);
+            DBClass.UpdateFaculty(EditView);
             DBClass.Lab3DBConnection.Close();
 
-            SqlDataReader tempReader = DBClass.StudentReader();
-            int studentID = 0;
+            SqlDataReader tempReader = DBClass.FacultyReader();
+            int facultyID = 0;
 
             while (tempReader.Read())
             {
-                studentID = (int)tempReader["StudentID"];
+                facultyID = (int)tempReader["FacultyID"];
             }
 
             tempReader.Close();
             DBClass.Lab3DBConnection.Close();
 
-            return RedirectToPage("/OfficeHourSch/StudentAccount", new { studentid = studentID });
+            return RedirectToPage("/OfficeHourSch/FacultyAccount", new { facultyid = facultyID });
         }
+
     }
 }
+

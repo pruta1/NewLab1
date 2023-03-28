@@ -1,14 +1,20 @@
-﻿@page
+﻿@page "{studentid:int?}"
 @model NewLab1.Pages.OfficeHourSch.ChooseFacultyModel
 @{
+    <form method="post">
+        <button class="btn btn-outline-primary" name="StudentAccount" value="@HttpContext.Session.GetString("studentid")">My Account</button>
+    </form>
+
+
     <div class="jumbotron text-center">
         <h1>Welcome to the Office Hours Page</h1>
         <p>Please select a faculty member from the dropdown menu below to view their office hours.</p>
     </div>
-
     //testing to make sure the user is logged in to access the pages
     if (HttpContext.Session.GetString("username") != null && HttpContext.Session.GetString("personType") == "Student")
     {
+
+       
 
         @*Drop down menu with sql data for each first and last name of faculty*@
         <form asp-page-handler="SingleSelect" method="post">

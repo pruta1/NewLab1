@@ -1,6 +1,9 @@
-﻿using NewLab1.Pages.DataClasses;
+﻿using Amazon.Auth.AccessControlPolicy;
+using MongoDB.Driver.Core.Configuration;
+using NewLab1.Pages.DataClasses;
 using System.Data;
 using System.Data.SqlClient;
+using static MongoDB.Driver.WriteConcern;
 
 namespace NewLab1.Pages.DB
 {
@@ -14,6 +17,111 @@ namespace NewLab1.Pages.DB
         private static readonly String? Lab3DBConnString = "Server=Localhost;Database=Lab3;Trusted_Connection=True";
         private static readonly String? AuthConnString = "Server=Localhost;Database=AUTH;Trusted_Connection=True";
 
+
+        public static SqlDataReader SingleOfficeReader(int OfficeHourID)
+        {
+            SqlCommand cmdProductRead = new SqlCommand();
+            cmdProductRead.Connection = Lab3DBConnection;
+            cmdProductRead.Connection.ConnectionString =
+            Lab3DBConnString;
+            cmdProductRead.CommandText = "SELECT * FROM OfficeHours WHERE officeHoursID = " + OfficeHourID;
+            cmdProductRead.Connection.Open();
+            SqlDataReader tempReader = cmdProductRead.ExecuteReader();
+            return tempReader;
+        }
+
+        public static SqlDataReader SingleStudentReader(int StudentID)
+        {
+            SqlCommand cmdStudentRead = new SqlCommand();
+            cmdStudentRead.Connection = Lab3DBConnection;
+            cmdStudentRead.Connection.ConnectionString =
+            Lab3DBConnString;
+            cmdStudentRead.CommandText = "SELECT * FROM Student WHERE studentID = " + StudentID;
+            cmdStudentRead.Connection.Open();
+            SqlDataReader tempReader = cmdStudentRead.ExecuteReader();
+            return tempReader;
+        }
+        public static SqlDataReader SingleFacultyReader(int FacultyID)
+        {
+            SqlCommand cmdFacultyRead = new SqlCommand();
+            cmdFacultyRead.Connection = Lab3DBConnection;
+            cmdFacultyRead.Connection.ConnectionString =
+            Lab3DBConnString;
+            cmdFacultyRead.CommandText = "SELECT * FROM Faculty WHERE facultyID = " + FacultyID;
+            cmdFacultyRead.Connection.Open();
+            SqlDataReader tempReader = cmdFacultyRead.ExecuteReader();
+            return tempReader;
+        }
+
+        public static void UpdateStudent(Student s)
+        {
+            String sqlQuery = "UPDATE Student SET ";
+            
+            static SqlDataReader SingleStudentReader(int studentid)
+            {
+                throw new NotImplementedException();
+            }
+
+            static void UpdatePrduct(Student studentview)
+            {
+                throw new NotImplementedException();
+            }
+            sqlQuery = "UPDATE Student SET fName='" + s.FirstName + "', lName='" + s.LastName + "', studentEmail='" + s.StuEmail + "', phone='" + s.Phone + "', image='" + s.Image + "' WHERE studentID=" + s.StudentID;
+            SqlCommand cmdStudentRead = new SqlCommand();
+            cmdStudentRead.Connection = Lab3DBConnection;
+            cmdStudentRead.Connection.ConnectionString =
+            Lab3DBConnString;
+            cmdStudentRead.CommandText = sqlQuery;
+            cmdStudentRead.Connection.Open();
+            cmdStudentRead.ExecuteNonQuery();
+        }
+
+        public static void UpdateFaculty(Faculty f)
+        {
+            String sqlQuery = "UPDATE Faculty SET ";
+
+            static SqlDataReader SingleFacultyReader(int facultyid)
+            {
+                throw new NotImplementedException();
+            }
+
+            static void UpdatePrduct(Faculty facultyview)
+            {
+                throw new NotImplementedException();
+            }
+            sqlQuery = "UPDATE Faculty SET fName='" + f.FirstName + "', lName='" + f.LastName + "', facultyEmail='" + f.FacultyEmail + "', image='" + f.Image + "' WHERE facultyID=" + f.FacultyID;
+            SqlCommand cmdFacultyRead = new SqlCommand();
+            cmdFacultyRead.Connection = Lab3DBConnection;
+            cmdFacultyRead.Connection.ConnectionString =
+            Lab3DBConnString;
+            cmdFacultyRead.CommandText = sqlQuery;
+            cmdFacultyRead.Connection.Open();
+            cmdFacultyRead.ExecuteNonQuery();
+        }
+
+        public static void UpdateOfficeHours(OfficeHours p)
+        {
+            String sqlQuery = "UPDATE OfficeHours SET ";
+
+            static SqlDataReader SingleOfficeReader(int officehourid)
+            {
+                throw new NotImplementedException();
+            }
+
+
+            static void UpdateProduct(OfficeHours officehourview)
+            {
+                throw new NotImplementedException();
+            }
+            sqlQuery += "studentName='" + p.StudentName + "' WHERE officeHoursID= " + p.OfficeHourID;
+            SqlCommand cmdProductRead = new SqlCommand();
+            cmdProductRead.Connection = Lab3DBConnection;
+            cmdProductRead.Connection.ConnectionString =
+            Lab3DBConnString;
+            cmdProductRead.CommandText = sqlQuery;
+            cmdProductRead.Connection.Open();
+            cmdProductRead.ExecuteNonQuery();
+        }
 
         //Sql Connection to get data from the faculty table 
         public static SqlDataReader FacultyReader()
@@ -65,16 +173,7 @@ namespace NewLab1.Pages.DB
         }
        
 
-        public static SqlDataReader SingleProductReader(int StudentID)
-        {
-            SqlCommand cmdProductRead = new SqlCommand();
-            cmdProductRead.Connection = new SqlConnection();
-            cmdProductRead.Connection.ConnectionString = Lab3DBConnString;
-            cmdProductRead.CommandText = "SELECT * FROM Student WHERE StudentID = " + StudentID;
-            cmdProductRead.Connection.Open();
-            SqlDataReader tempReader = cmdProductRead.ExecuteReader();
-            return tempReader;
-        }
+       
         public static SqlDataReader GeneralReaderQuery(string sqlQuery)
         {
             SqlCommand cmdProductRead = new SqlCommand();
@@ -220,64 +319,29 @@ namespace NewLab1.Pages.DB
     }
 
 
-        public static SqlDataReader SingleOfficeReader(int OfficeHourID)
-        {
-            SqlCommand cmdProductRead = new SqlCommand();
-            cmdProductRead.Connection = Lab3DBConnection;
-            cmdProductRead.Connection.ConnectionString =
-            Lab3DBConnString;
-            cmdProductRead.CommandText = "SELECT * FROM OfficeHours WHERE officeHoursID = " + OfficeHourID;
-            cmdProductRead.Connection.Open();
-            SqlDataReader tempReader = cmdProductRead.ExecuteReader();
-            return tempReader;
-        }
-        public static void UpdateOfficeHours(OfficeHours p)
-        {
-            String sqlQuery = "UPDATE OfficeHours SET ";
-
-            static SqlDataReader SingleOfficeReader(int officehourid)
-            {
-                throw new NotImplementedException();
-            }
-
-            static void UpdateProduct(OfficeHours officehourview)
-            {
-                throw new NotImplementedException();
-            }
-            sqlQuery += "studentName='" + p.StudentName + "' WHERE officeHoursID= " + p.OfficeHourID;
-            SqlCommand cmdProductRead = new SqlCommand();
-            cmdProductRead.Connection = Lab3DBConnection;
-            cmdProductRead.Connection.ConnectionString =
-            Lab3DBConnString;
-            cmdProductRead.CommandText = sqlQuery;
-            cmdProductRead.Connection.Open();
-            cmdProductRead.ExecuteNonQuery();
-        }
-
-
         public static int LoginQuery(string loginQuery)
-        {
-            // This method expects to receive an SQL SELECT
-            // query that uses the COUNT command.
+    {
+        // This method expects to receive an SQL SELECT
+        // query that uses the COUNT command.
 
             SqlCommand cmdLogin = new SqlCommand();
-            cmdLogin.Connection = Lab3DBConnection;
-            cmdLogin.Connection.ConnectionString = Lab3DBConnString;
-            cmdLogin.CommandText = loginQuery;
-            cmdLogin.Connection.Open();
+        cmdLogin.Connection = Lab3DBConnection;
+        cmdLogin.Connection.ConnectionString = Lab3DBConnString;
+        cmdLogin.CommandText = loginQuery;
+        cmdLogin.Connection.Open();
 
-            // ExecuteScalar() returns back data type Object
-            // Use a typecast to convert this to an int.
-            // Method returns first column of first row.
+        // ExecuteScalar() returns back data type Object
+        // Use a typecast to convert this to an int.
+        // Method returns first column of first row.
             int rowCount = (int)cmdLogin.ExecuteScalar();
+        return rowCount;
+    }
 
-            return rowCount;
-        }
 
-        public static int SecureLogin(string Username, string Password)
-        {
-            string loginQuery =
-                "SELECT COUNT(*) FROM Credentials where Username = @Username and Password = @Password";
+    public static int SecureLogin(string Username, string Password)
+    {
+        string loginQuery =
+        "SELECT COUNT(*) FROM Credentials where Username = @Username and Password = @Password";
 
             SqlCommand cmdLogin = new SqlCommand();
             cmdLogin.Connection = Lab3DBConnection;

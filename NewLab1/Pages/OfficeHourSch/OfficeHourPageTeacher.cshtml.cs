@@ -22,6 +22,14 @@ namespace NewLab1.Pages.OfficeHourSch
             FacultyList = new List<Faculty>();
 
         }
+        public IActionResult OnPost(string FacultyAccount, int facultyid)
+        {
+            if (facultyid != 0)
+            {
+                return RedirectToPage("FacultyAccount", new { facultyid = facultyid });
+            }
+            return Page();
+        }
 
         //OnGet used to retrieve information to place in table of office hour page  
         public void OnGet(int facultyID)

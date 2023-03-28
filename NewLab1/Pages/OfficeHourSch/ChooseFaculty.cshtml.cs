@@ -36,6 +36,17 @@ namespace NewLab1.Pages.OfficeHourSch
         }
 
 
+
+
+        public IActionResult OnPost(string StudentAccount, int studentid)
+        {
+            if (studentid != 0)
+            {
+                return RedirectToPage("StudentAccount", new { studentid = studentid });
+            }
+            return Page();
+        }
+
         //OnGet to retrieve faculty first and last names for dropdown menu
         public void OnGet()
         {
@@ -57,15 +68,10 @@ namespace NewLab1.Pages.OfficeHourSch
         }
 
 
-
-
-
-
         public IActionResult OnPostSingleSelect(int facultyID)
         {
             return RedirectToPage("OfficeHourPage", new { facultyID = SelectedTeacher });
         }
-   
-        }
 
     }
+}

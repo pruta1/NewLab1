@@ -1,9 +1,10 @@
-﻿@page "{studentid:int?}"
-@model NewLab1.Pages.OfficeHourSch.StudentAccountModel
+﻿@page "{facultyid:int?}"
+@model NewLab1.Pages.OfficeHourSch.FacultyAccountModel
+@{
+}
+<h1>Faculty Account Information</h1>
 
-<h1>Student Account Information</h1>
-
-Profile Picture: 
+Profile Picture:
 <div style="max-width: 300px;">
     <img src="/Images/@Model.EditView.Image" style="max-width: 100%;" />
 </div>
@@ -13,8 +14,9 @@ Profile Picture:
 <br />
 <br />
 
+
 <form asp-page-handler="Update" method="post" enctype="multipart/form-data">
-    <input type="hidden" asp-for="@Model.EditView.StudentID" />
+    <input type="hidden" asp-for="@Model.EditView.FacultyID" />
 
     <label asp-for="@Model.EditView.FirstName"></label>
     <input type="text" asp-for="@Model.EditView.FirstName" />
@@ -22,11 +24,8 @@ Profile Picture:
     <label asp-for="@Model.EditView.LastName"></label>
     <input type="text" asp-for="@Model.EditView.LastName" />
     <br /><br />
-    <label asp-for="@Model.EditView.StuEmail"></label>
-    <input type="text" asp-for="@Model.EditView.StuEmail" />
-    <br /><br />
-    <label asp-for="@Model.EditView.Phone"></label>
-    <input type="text" asp-for="@Model.EditView.Phone" />
+    <label asp-for="@Model.EditView.FacultyEmail"></label>
+    <input type="text" asp-for="@Model.EditView.FacultyEmail" />
     <br /><br />
     <label asp-for="@Model.Picture">Upload Picture:</label>
     <input type="file" name="Picture" />

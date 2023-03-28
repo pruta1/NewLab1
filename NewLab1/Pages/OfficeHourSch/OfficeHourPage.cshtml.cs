@@ -15,7 +15,7 @@ namespace NewLab1.Pages.OfficeHourSch
 
         public List<Faculty> FacultyList { get; set; }
 
-        public List<Queue> QueueList { get; set; }  
+        public List<Queue> QueueList { get; set; }
 
 
 
@@ -27,6 +27,7 @@ namespace NewLab1.Pages.OfficeHourSch
             QueueList = new List<Queue>();
 
         }
+
 
         //OnGet used to retrieve information to place in table of office hour page  
         public void OnGet(int facultyID)
@@ -49,10 +50,6 @@ namespace NewLab1.Pages.OfficeHourSch
                 }
             }
             DBClass.Lab3DBConnection.Close();
-        }
-        public IActionResult OnPostStudentQueue()
-        {
-            return RedirectToPage("/OfficeHourSch/StudentQueue");
         }
 
     }

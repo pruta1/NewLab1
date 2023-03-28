@@ -50,8 +50,9 @@ namespace NewLab1.Pages.OfficeHourSch
                     }
                     else if (personType == "Student")
                     {
+                        int studentID = (int)tempReader["StudentID"];
                         DBClass.Lab3DBConnection.Close();
-                        return RedirectToPage("/OfficeHourSch/ChooseFaculty");
+                        return RedirectToPage("/OfficeHourSch/ChooseFaculty", new { studentid = studentID});
                     }
                 }
 
